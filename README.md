@@ -14,6 +14,8 @@ OpenPrince is an open source java reimplementation of the original Prince of Per
 
 Place the original data files into a folder called "data" under the project folder.
 
+Many algorithms and reverse engineered data are based on the [Princed Project](http://www.princed.org/). Without their hard work, none of this would be possible.
+
 ## 2. Design goals
 
 For the first milestone, this projects tries to re-create the original POP experience using the original game assets. After that, work can start on adding extra level features, additional renderers for extended graphics, and anything else that one can think of.
