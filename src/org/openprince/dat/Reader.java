@@ -5,15 +5,17 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.util.HashMap;
 
 import org.openprince.dat.res.Resource;
-import org.openprince.dat.res.ResourceManager;
 
 public class Reader {
 	public int fileSize;
 	ByteBuffer buffer;
 	Header header;
 	Index index;
+
+	private HashMap<Integer, Resource> resources;
 
 	public Reader(String filename) throws IOException {
 		File file = new File(filename);
@@ -32,13 +34,9 @@ public class Reader {
 		}
 
 		index = new Index(buffer, header);
-	}
-
-	public void register() {
-		ResourceManager manager = ResourceManager.getInstance();
 
 		for (IndexItem item : index.items) {
-			manager.register(new Resource(buffer, item));
+			resources.put(item.id, new Resource(buffer, item));
 		}
 	}
 }
