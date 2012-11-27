@@ -14,6 +14,6 @@ public class Main {
 			e.printStackTrace();
 		}
 
-		System.out.println("done.\nLoaded ");
+		System.out.println("done.");
 	}
 }

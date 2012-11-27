@@ -7,7 +7,10 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.HashMap;
 
+import org.openprince.dat.res.Definition;
+import org.openprince.dat.res.DefinitionManager;
 import org.openprince.dat.res.Resource;
+import org.openprince.dat.res.ResourceType;
 
 public class Reader {
 	public int fileSize;
@@ -34,9 +37,21 @@ public class Reader {
 		}
 
 		index = new Index(buffer, header);
+		
+		resources = new HashMap<Integer, Resource>();
+
+		Resource res;
+		ResourceType type;
+		Definition def;
+		DefinitionManager dm = DefinitionManager.getInstance();
 
 		for (IndexItem item : index.items) {
-			resources.put(item.id, new Resource(buffer, item));
+			res = new Resource(buffer, item);
+			type = res.getType();
+			def = dm.getById(filename, res.id);
+			if (def != null)
+				type = def.type;
+			resources.put(item.id, res.getAs(type));
 		}
 	}
 }

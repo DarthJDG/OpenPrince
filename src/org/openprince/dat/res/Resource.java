@@ -27,4 +27,35 @@ public class Resource {
 	public ResourceType getType() {
 		return ResourceType.BINARY;
 	}
+
+	public Resource getAs(ResourceType type) {
+		if (getType() == type) {
+			return this;
+		}
+
+		Resource res = this;
+
+		switch (type) {
+		case BINARY:
+			res = new Resource(this);
+			break;
+		case IMAGE:
+			res = new ImageResource(this);
+			break;
+		case LEVEL:
+			// TODO: Level resource
+			break;
+		case MUSIC:
+			// TODO: Music resource
+			break;
+		case PALETTE:
+			res = new PaletteResource(this);
+			break;
+		case SOUND:
+			// TODO: Sound resource
+			break;
+		}
+
+		return res;
+	}
 }
