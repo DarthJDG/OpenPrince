@@ -110,6 +110,7 @@ public class ImageResource extends Resource {
 			buffer.position(6);
 			while (iCursor < buffer.limit() - 6) {
 				maskbyte = buffer.get(6 + iCursor);
+				iCursor++;
 				for (k = 8; k != 0 && (iCursor < buffer.limit() - 6); k--) {
 					int bit = maskbyte & 1;
 					maskbyte >>= 1;
@@ -126,7 +127,7 @@ public class ImageResource extends Resource {
 						loc = (oCursor - loc) & 0x3ff;
 
 						while (rep-- > 0) {
-							decompressed.add(buffer.get(6 + oCursor - loc));
+							decompressed.add(decompressed.get(oCursor - loc));
 							oCursor++;
 						}
 					}
@@ -138,6 +139,7 @@ public class ImageResource extends Resource {
 			}
 
 			break;
+
 		default:
 			break;
 		}
