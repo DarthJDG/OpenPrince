@@ -2,8 +2,8 @@ package org.openprince;
 
 import java.io.IOException;
 
+import org.openprince.dat.DefinitionManager;
 import org.openprince.dat.Reader;
-import org.openprince.dat.res.DefinitionManager;
 
 public class Main {
 	public static void main(String[] args) {

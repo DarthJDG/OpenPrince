@@ -1,10 +1,8 @@
-package org.openprince.dat.res;
+package org.openprince.dat;
 
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.openprince.dat.IndexItem;
 
 public class PaletteResource extends Resource {
 	public List<Integer> r;

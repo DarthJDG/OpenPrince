@@ -1,4 +1,4 @@
-package org.openprince.dat.res;
+package org.openprince.dat;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;

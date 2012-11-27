@@ -1,9 +1,7 @@
-package org.openprince.dat.res;
+package org.openprince.dat;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
-
-import org.openprince.dat.IndexItem;
 
 public class Resource {
 	public int id;

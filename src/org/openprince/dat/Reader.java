@@ -7,11 +7,6 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.HashMap;
 
-import org.openprince.dat.res.Definition;
-import org.openprince.dat.res.DefinitionManager;
-import org.openprince.dat.res.Resource;
-import org.openprince.dat.res.ResourceType;
-
 public class Reader {
 	public int fileSize;
 	ByteBuffer buffer;
