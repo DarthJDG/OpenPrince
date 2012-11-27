@@ -37,7 +37,7 @@ public class Reader {
 		}
 
 		index = new Index(buffer, header);
-		
+
 		resources = new HashMap<Integer, Resource>();
 
 		Resource res;
@@ -49,8 +49,9 @@ public class Reader {
 			res = new Resource(buffer, item);
 			type = res.getType();
 			def = dm.getById(filename, res.id);
-			if (def != null)
+			if (def != null) {
 				type = def.type;
+			}
 			resources.put(item.id, res.getAs(type));
 		}
 	}

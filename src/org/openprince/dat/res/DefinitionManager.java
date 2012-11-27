@@ -1,6 +1,14 @@
 package org.openprince.dat.res;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.HashMap;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 public class DefinitionManager {
 	private static DefinitionManager manager;
@@ -18,11 +26,20 @@ public class DefinitionManager {
 		return manager;
 	}
 
-	public Definition getById(String filename, int id) {
-		return definitions.get(filename + " " + id);
+	public Definition getById(String path, int id) {
+		String[] chunks = path.split("/");
+		return definitions.get(chunks[chunks.length - 1] + " " + id);
 	}
 
-	public void loadFromFile(String filename) {
-		// TODO: Load definition from file
+	public void loadFromFile(String filename) throws FileNotFoundException,
+			IOException, ParseException {
+		JSONParser parser = new JSONParser();
+
+		JSONArray defArray = (JSONArray) parser.parse(new FileReader(filename));
+		Definition def;
+		for (Object defObject : defArray) {
+			def = new Definition((JSONObject) defObject);
+			definitions.put(def.filename + " " + def.id, def);
+		}
 	}
 }
