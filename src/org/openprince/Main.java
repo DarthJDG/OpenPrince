@@ -20,6 +20,7 @@ public class Main {
 
 		try {
 			new Reader("data/vdungeon.dat");
+			new Reader("data/levels.dat");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -48,7 +48,8 @@ public enum Modifier {
 	CHOMP_EXTRA_OPEN (0x0704, BlockGroup.CHOMP),
 	CHOMP_STUCK_OPEN (0x0705, BlockGroup.CHOMP),
 	WALL_D_NORMAL_P_BLUE_LINE (0x0800, BlockGroup.WALL),
-	WALL_D_NORMAL_P_NO_BLUE_LINE (0x0801, BlockGroup.WALL);
+	WALL_D_NORMAL_P_NO_BLUE_LINE (0x0801, BlockGroup.WALL),
+	UNKNOWN (0xffff, BlockGroup.NONE);
 
 	public final int value;
 	public final BlockGroup group;
@@ -66,10 +67,18 @@ public enum Modifier {
 	}
 
 	public static Modifier get(int value) {
-		return sMap.get(value);
+		Modifier m = sMap.get(value);
+		if (m == null) {
+			m = Modifier.UNKNOWN;
+		}
+		return m;
 	}
 
 	public static Modifier get(BlockGroup group, int value) {
-		return sMap.get(group.modifierOffset + value);
+		Modifier m = sMap.get(group.modifierOffset + value);
+		if (m == null) {
+			m = Modifier.UNKNOWN;
+		}
+		return m;
 	}
 }

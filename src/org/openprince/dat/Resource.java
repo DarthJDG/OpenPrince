@@ -41,7 +41,7 @@ public class Resource {
 				res = new ImageResource(this);
 				break;
 			case LEVEL:
-				// TODO: Level resource
+				res = new LevelResource(this);
 				break;
 			case MUSIC:
 				// TODO: Music resource

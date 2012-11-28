@@ -35,7 +35,8 @@ public enum Block {
 	LATTICE_LEFT (0x1c, BlockGroup.NONE),
 	LATTICE_RIGHT (0x1d, BlockGroup.NONE),
 	TORCH_WITH_DEBRIS (0x1e, BlockGroup.NONE),
-	NULL (0x1f, BlockGroup.NONE);
+	NULL (0x1f, BlockGroup.NONE),
+	UNKNOWN (0x100, BlockGroup.NONE);
 
 	public final int value;
 	public final BlockGroup group;
@@ -53,6 +54,10 @@ public enum Block {
 	}
 
 	public static Block get(int value) {
-		return sMap.get(value);
+		Block b = sMap.get(value);
+		if (b == null) {
+			b = Block.UNKNOWN;
+		}
+		return b;
 	}
 }
