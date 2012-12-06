@@ -19,8 +19,10 @@ public class Main {
 		System.out.println("Loading resources...");
 
 		try {
-			new Reader("data/vdungeon.dat");
-			new Reader("data/levels.dat");
+			Reader dat = new Reader("data/vdungeon.dat");
+			dat.allocateSprites();
+
+			System.out.println("Sheets: " + dat.sheets.size());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

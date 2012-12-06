@@ -4,6 +4,8 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.openprince.graphics.SpriteSheet;
+
 public class ImageResource extends Resource {
 	public int width;
 	public int height;
@@ -12,6 +14,10 @@ public class ImageResource extends Resource {
 	public ImageDirection direction;
 
 	public List<Byte> decompressed;
+
+	public SpriteSheet sheet = null;
+	public int sheetX = 0;
+	public int sheetY = 0;
 
 	public ImageResource(ByteBuffer buffer, IndexItem index) {
 		super(buffer, index);
@@ -142,5 +148,61 @@ public class ImageResource extends Resource {
 			default:
 				break;
 		}
+	}
+
+	public void renderToSheet(SpriteSheet sheet, PaletteResource pal, int sx,
+			int sy) {
+		this.sheet = sheet;
+		sheetX = sx;
+		sheetY = sy;
+
+		try {
+			int bits = 0;
+			int val = 0;
+			int pos = 0;
+			int pixel = 0;
+
+			if (direction == ImageDirection.LEFT_RIGHT) {
+				for (int y = 0; y < height; y++) {
+					for (int x = 0; x < width; x++) {
+						if (bits == 0) {
+							val = decompressed.get(pos) & 0xff;
+							bits = 8;
+							pos++;
+						}
+
+						pixel = val & (bpp - 1);
+						val >>= bpp;
+						bits -= bpp;
+
+						sheet.drawPixel(sx + x, sy + y, pal.r.get(pixel)
+								.byteValue(), pal.g.get(pixel).byteValue(),
+								pal.b.get(pixel).byteValue());
+					}
+				}
+			} else {
+				for (int x = 0; x < width; x++) {
+					for (int y = 0; y < height; y++) {
+						if (bits == 0) {
+							val = decompressed.get(pos) & 0xff;
+							bits = 8;
+							pos++;
+						}
+
+						pixel = val & (bpp - 1);
+						val >>= bpp;
+						bits -= bpp;
+
+						sheet.drawPixel(sx + x, sy + y, pal.r.get(pixel)
+								.byteValue(), pal.g.get(pixel).byteValue(),
+								pal.b.get(pixel).byteValue());
+					}
+				}
+			}
+		} catch (Exception e) {
+			System.out.println("Exception: " + e.getMessage());
+		}
+
+		System.out.println("Allocated at " + sx + ", " + sy);
 	}
 }
