@@ -1,6 +1,7 @@
 package org.openprince.graphics;
 
 import java.nio.ByteBuffer;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SpriteSheet {
@@ -27,6 +28,7 @@ public class SpriteSheet {
 		buffer = ByteBuffer.allocateDirect(4 * this.width * this.height);
 		clearBuffer();
 
+		free = new ArrayList<Rect>();
 		free.add(new Rect(GAP, GAP, this.width - GAP * 2, this.height - GAP * 2));
 	}
 
