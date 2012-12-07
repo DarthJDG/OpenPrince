@@ -10,7 +10,7 @@ public class SpriteSheet {
 	private int width;
 	private int height;
 
-	ByteBuffer buffer;
+	public ByteBuffer buffer;
 	List<Rect> free;
 
 	public SpriteSheet() {

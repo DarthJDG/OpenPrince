@@ -156,6 +156,10 @@ public class ImageResource extends Resource {
 		sheetX = sx;
 		sheetY = sy;
 
+		if (compression != ImageCompression.RLE)
+			return;
+		// if(direction != ImageDirection.LEFT_RIGHT) return;
+
 		try {
 			int bits = 0;
 			int val = 0;
@@ -163,39 +167,66 @@ public class ImageResource extends Resource {
 			int pixel = 0;
 
 			if (direction == ImageDirection.LEFT_RIGHT) {
+				int xoffs = 8 / bpp - 1;
 				for (int y = 0; y < height; y++) {
-					for (int x = 0; x < width; x++) {
-						if (bits == 0) {
-							val = decompressed.get(pos) & 0xff;
-							bits = 8;
-							pos++;
+					for (int x = 0; x < width; x += 8 / bpp) {
+						val = decompressed.get(pos) & 0xff;
+						xoffs = 8 / bpp - 1;
+						bits = 8;
+
+						while (x + xoffs >= width) {
+							xoffs--;
+							val >>= bpp;
+							bits -= bpp;
 						}
 
-						pixel = val & (bpp - 1);
-						val >>= bpp;
-						bits -= bpp;
+						while (bits > 0) {
+							pixel = val & ((1 << bpp) - 1);
+							val >>= bpp;
+							bits -= bpp;
 
-						sheet.drawPixel(sx + x, sy + y, pal.r.get(pixel)
-								.byteValue(), pal.g.get(pixel).byteValue(),
-								pal.b.get(pixel).byteValue());
+							sheet.drawPixel(xoffs + sx + x, sy + y,
+									pal.r.get(pixel)
+											.byteValue(), pal.g.get(pixel)
+											.byteValue(),
+									pal.b.get(pixel).byteValue());
+
+							xoffs--;
+						}
+
+						pos++;
 					}
 				}
 			} else {
-				for (int x = 0; x < width; x++) {
-					for (int y = 0; y < height; y++) {
+				int xoffs = 8 / bpp - 1;
+				for (int x = 0; x < width; x += 8 / bpp) {
+					val = decompressed.get(pos) & 0xff;
+					bits = 8;
+					for (int y = 0; y < height && xoffs >= 0;) {
+						while (x + xoffs >= width) {
+							xoffs--;
+							val >>= bpp;
+							bits -= bpp;
+						}
+
+						pixel = val & ((1 << bpp) - 1);
+						val >>= bpp;
+						bits -= bpp;
+
+						sheet.drawPixel(xoffs + sx + x, sy + y, pal.r
+								.get(pixel)
+								.byteValue(), pal.g.get(pixel).byteValue(),
+								pal.b.get(pixel).byteValue());
+
+						xoffs--;
+
 						if (bits == 0) {
 							val = decompressed.get(pos) & 0xff;
 							bits = 8;
 							pos++;
+							y++;
+							xoffs = 8 / bpp - 1;
 						}
-
-						pixel = val & (bpp - 1);
-						val >>= bpp;
-						bits -= bpp;
-
-						sheet.drawPixel(sx + x, sy + y, pal.r.get(pixel)
-								.byteValue(), pal.g.get(pixel).byteValue(),
-								pal.b.get(pixel).byteValue());
 					}
 				}
 			}
