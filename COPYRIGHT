@@ -2,7 +2,7 @@ OpenPrince
 Copyright (C) 2012, Robert Biro (DarthJDG)
 
 Many algorithms and reverse engineered data are based on the Princed Project.
-http://www.princed.org/
+<http://www.princed.org/>
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -16,3 +16,14 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+
+This program uses other open source projects:
+
+JSON.simple - A simple Java toolkit for JSON
+<http://code.google.com/p/json-simple/>
+Available under Apache License 2.0, see <http://www.apache.org/licenses/>.
+
+LWJGL - Lightweight Java Game Library
+<http://www.lwjgl.org/>
+Copyright (c) 2002-2007 Lightweight Java Game Library Project

@@ -26,4 +26,4 @@ This project is at the planning and proof of concept stage at the moment, ideas,
 
 ## 4. License and copyright
 
-This program is available under GPL3, please see the LICENSE and COPYRIGHT files for details.
+This program is available under GPL3 and uses other open source projects. Please see the LICENSE and COPYRIGHT files for details.
