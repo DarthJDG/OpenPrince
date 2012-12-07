@@ -217,9 +217,9 @@ public class ImageResource extends Resource {
 						xoffs--;
 
 						if (bits == 0) {
+							pos++;
 							val = decompressed.get(pos) & 0xff;
 							bits = 8;
-							pos++;
 							y++;
 							xoffs = 8 / bpp - 1;
 						}
