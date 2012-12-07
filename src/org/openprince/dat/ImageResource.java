@@ -123,7 +123,7 @@ public class ImageResource extends Resource {
 							oCursor++;
 						} else {
 							loc = 66 + ((buffer.get(6 + iCursor) & 0x03) << 8)
-									+ buffer.get(6 + iCursor + 1);
+									+ (buffer.get(6 + iCursor + 1) & 0xff);
 							rep = 3 + ((buffer.get(6 + iCursor) & 0xfc) >> 2);
 
 							iCursor += 2;
@@ -155,10 +155,6 @@ public class ImageResource extends Resource {
 		this.sheet = sheet;
 		sheetX = sx;
 		sheetY = sy;
-
-		if (compression != ImageCompression.RLE)
-			return;
-		// if(direction != ImageDirection.LEFT_RIGHT) return;
 
 		try {
 			int bits = 0;
