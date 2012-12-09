@@ -156,6 +156,10 @@ public class ImageResource extends Resource {
 		sheetX = sx;
 		sheetY = sy;
 
+		if (pal == null) {
+			pal = new PaletteResource();
+		}
+
 		try {
 			int bits = 0;
 			int val = 0;
@@ -181,11 +185,13 @@ public class ImageResource extends Resource {
 							val >>= bpp;
 							bits -= bpp;
 
-							sheet.drawPixel(xoffs + sx + x, sy + y,
-									pal.r.get(pixel)
-											.byteValue(), pal.g.get(pixel)
-											.byteValue(),
-									pal.b.get(pixel).byteValue());
+							if (pixel > 0) {
+								sheet.drawPixel(xoffs + sx + x, sy + y,
+										pal.r.get(pixel)
+												.byteValue(), pal.g.get(pixel)
+												.byteValue(),
+										pal.b.get(pixel).byteValue());
+							}
 
 							xoffs--;
 						}
@@ -209,10 +215,12 @@ public class ImageResource extends Resource {
 						val >>= bpp;
 						bits -= bpp;
 
-						sheet.drawPixel(xoffs + sx + x, sy + y, pal.r
-								.get(pixel)
-								.byteValue(), pal.g.get(pixel).byteValue(),
-								pal.b.get(pixel).byteValue());
+						if (pixel > 0) {
+							sheet.drawPixel(xoffs + sx + x, sy + y, pal.r
+									.get(pixel)
+									.byteValue(), pal.g.get(pixel).byteValue(),
+									pal.b.get(pixel).byteValue());
+						}
 
 						xoffs--;
 

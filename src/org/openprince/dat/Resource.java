@@ -22,6 +22,11 @@ public class Resource {
 		buffer = res.buffer;
 	}
 
+	public Resource() {
+		id = 0;
+		buffer = null;
+	}
+
 	public ResourceType getType() {
 		return ResourceType.BINARY;
 	}

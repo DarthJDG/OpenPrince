@@ -93,10 +93,8 @@ public class Reader {
 					Definition def = dm.getById(filename, res.id);
 					if (def != null) {
 						PaletteResource pal = (PaletteResource) getById(def.pal);
-						if (pal != null) {
-							image.renderToSheet(selectedSheet, pal, rect.x1,
-									rect.y1);
-						}
+						image.renderToSheet(selectedSheet, pal, rect.x1,
+								rect.y1);
 					}
 				}
 			}

@@ -25,7 +25,7 @@ public class Main {
 		Reader dat = null;
 
 		try {
-			dat = new Reader("data/kid.dat");
+			dat = new Reader("data/prince.dat");
 			dat.allocateSprites();
 
 			System.out.println("Sheets: " + dat.sheets.size());
@@ -44,6 +44,8 @@ public class Main {
 		}
 
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
+		GL11.glEnable(GL11.GL_BLEND);
+		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 
 		int texId = GL11.glGenTextures();
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, texId);
@@ -52,7 +54,7 @@ public class Main {
 				GL11.GL_LINEAR);
 		GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER,
 				GL11.GL_LINEAR);
-		GL11.glTexImage2D(GL11.GL_TEXTURE_2D, 0, GL11.GL_RGB, 512, 512, 0,
+		GL11.glTexImage2D(GL11.GL_TEXTURE_2D, 0, GL11.GL_RGBA, 512, 512, 0,
 				GL11.GL_RGBA, GL11.GL_UNSIGNED_BYTE, dat.sheets.get(0).buffer);
 
 		// init OpenGL

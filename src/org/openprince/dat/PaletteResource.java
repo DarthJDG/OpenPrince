@@ -19,6 +19,23 @@ public class PaletteResource extends Resource {
 		getPalette();
 	}
 
+	public PaletteResource() {
+		super();
+
+		// Create default palette
+		r = new ArrayList<Integer>();
+		g = new ArrayList<Integer>();
+		b = new ArrayList<Integer>();
+
+		r.add(0);
+		g.add(0);
+		b.add(0);
+
+		r.add(255);
+		g.add(255);
+		b.add(255);
+	}
+
 	@Override
 	public ResourceType getType() {
 		return ResourceType.PALETTE;
