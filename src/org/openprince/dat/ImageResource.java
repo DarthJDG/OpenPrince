@@ -226,7 +226,9 @@ public class ImageResource extends Resource {
 
 						if (bits == 0) {
 							pos++;
-							val = decompressed.get(pos) & 0xff;
+							if(pos < decompressed.size()) {
+								val = decompressed.get(pos) & 0xff;
+							}
 							bits = 8;
 							y++;
 							xoffs = 8 / bpp - 1;
@@ -235,9 +237,7 @@ public class ImageResource extends Resource {
 				}
 			}
 		} catch (Exception e) {
-			System.out.println("Exception: " + e.getMessage());
+			System.out.println("Exception (" + id + "): " + e.getMessage());
 		}
-
-		System.out.println("Allocated at " + sx + ", " + sy);
 	}
 }
