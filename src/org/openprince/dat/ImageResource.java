@@ -146,6 +146,10 @@ public class ImageResource extends Resource {
 				break;
 
 			default:
+				buffer.position(6);
+				while(buffer.remaining() > 0) {
+					decompressed.add(buffer.get());
+				}
 				break;
 		}
 	}
